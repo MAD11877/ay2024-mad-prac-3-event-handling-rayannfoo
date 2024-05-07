@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,15 +36,19 @@ public class MainActivity extends AppCompatActivity {
         // initialise user
         User user = new User("MAD", "MAD Developer", 1, false);
 
-        // Get textviews and button from the layout
+        // Get the TextViews and button from the layout
         TextView tvName = findViewById(R.id.tvName);
-        TextView tvDesc = findViewById(R.id.description);
+        TextView tvDescription = findViewById(R.id.tvDescription);
         Button btnFollow = findViewById(R.id.Button1);
+
+        // Set the TextViews with the user's name and description
+        tvName.setText(user.name);
+        tvDescription.setText(user.description);
 
         Random random = new Random();
 
-        // Generate a random number within the range of 10 digits
-        long max = 9999999999L; // 10^10 - 1
+        // Generate a random number within the range of 6 digits
+        long max = 999999L; // 10^10 - 1
         long number = random.nextLong() % (max + 1);
 
         tvName.setText(user.name + " " + number);
@@ -67,5 +72,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button button2 = findViewById(R.id.Button2);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to launch the MessageGroup activity
+                Intent intent = new Intent(MainActivity.this, MessageGroup.class);
+
+                // Start the MessageGroup activity
+                startActivity(intent);
+            }
+        });
     }
 }
